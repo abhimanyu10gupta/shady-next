@@ -1,5 +1,5 @@
 declare interface MenuItemProps {
-    _id: Schema.Types.ObjectId,
+    // _id: Schema.Types.ObjectId,
     name: string;
     description: string;
     price: string;
