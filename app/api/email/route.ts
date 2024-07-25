@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
 export async function POST(request: NextRequest) {
-  const { name, time, date, partySize, phone } = await request.json();
+  const { name, time, date, pax, phone } = await request.json();
 
   const transport = nodemailer.createTransport({
     service: 'gmail',
