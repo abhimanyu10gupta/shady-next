@@ -63,9 +63,9 @@ function onSubmit(data: z.infer<typeof formSchema>) {
 
     const { name, pax, time, phone, date } = data
 
+    date.setDate(date.getDate() + 1)
     const formatDate = date.toISOString().split('T')[0];
-    console.log(data)
-    console.log('fomrat date: ', formatDate)
+
     const booking = { 
         name: name,
         pax: pax,
@@ -86,6 +86,8 @@ function onSubmit(data: z.infer<typeof formSchema>) {
         alert(err);
       });
 }
+
+const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
   return (
     <div className='w-screen flex justify-center p-5 pt-20 pb-20 font-bold md:p-24 flex-col '>
@@ -194,7 +196,7 @@ function onSubmit(data: z.infer<typeof formSchema>) {
                           selected={field.value}
                           onSelect={field.onChange}
                           disabled={(date) =>
-                            date < new Date() || date < new Date("1900-01-01")
+                            date < yesterday || date < new Date("1900-01-01")
                           }
                           initialFocus
                         />

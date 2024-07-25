@@ -16,6 +16,37 @@ export const reserveTableSchema = () => z.object({
   time: z.string(),
 })
 
+
+export const getNextSunday = () => {
+  const now = new Date();
+  
+  // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  const currentDay = now.getDay();
+
+  // Calculate the date of the last Monday and the next Sunday
+  const lastMonday = new Date(now);
+  lastMonday.setDate(now.getDate() - ((currentDay + 6) % 7));
+
+  const nextSunday = new Date(lastMonday);
+  nextSunday.setDate(lastMonday.getDate() + 6);
+
+  return nextSunday;
+}
+  // Function to check if a date is within the current week
+// function isWithinCurrentWeek(date: Date) {
+//   return date >= lastMonday && date <= nextSunday;
+// }
+
+  // Filter bookings to get those within the current week
+//   const weekBookings = bookings.filter(booking => {
+//     const bookingDate = new Date(booking.date);
+//     return isWithinCurrentWeek(bookingDate);
+//   });
+
+//   return weekBookings;
+// }
+
+
 export const formatDateToLocal = (
   dateStr: string,
   locale: string = 'en-US',

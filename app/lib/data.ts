@@ -1,6 +1,6 @@
 import Booking from '@/models/booking';
 import dbConnect from './dbConnect';
-import { formatCurrency } from './utils';
+import { formatCurrency, getNextSunday } from './utils';
 import mongoose from 'mongoose';
 import  Events  from '@/models/event';
 
@@ -21,8 +21,25 @@ export async function fetchBookings() {
 export async function fetchLatestBookings() {
   await dbConnect();
 
+  const nextSunday = getNextSunday().toISOString().split('T')[0];
+  // const nextSundayDate = nextSunday.getDate();
+  // const book = await Booking.findOne({name: 'Priyaa gupta'})
+  // const bookDateStr = book.date
+  // console.log(book)
+  // console.log(bookDateStr)
+  console.log("nextsunday", nextSunday)
+  const today = new Date().toISOString().split('T')[0];
+  console.log("today",today)
+
+  // console.log("today", today)
+  // console.log(today >= bookDateStr)
+
   try {
-    const data = await Booking.find({}).select('name pax date time')
+    const data = await Booking.find({      
+      $and: [
+          {date: {$gte : today}},
+          {date: {$lte : nextSunday}}
+      ]}).select('name pax date time')
     return data;
   }catch(error) {
     console.error('Database Error:', error);
