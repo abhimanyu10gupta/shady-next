@@ -64,8 +64,8 @@ function onSubmit(data: z.infer<typeof formSchema>) {
     const { name, pax, time, phone, date } = data
 
     const formatDate = date.toISOString().split('T')[0];
-
-    
+    console.log(data)
+    console.log('fomrat date: ', formatDate)
     const booking = { 
         name: name,
         pax: pax,
@@ -82,21 +82,10 @@ function onSubmit(data: z.infer<typeof formSchema>) {
       method: 'POST',
       body: JSON.stringify(data),
     })
-      .then((res) => {
-        res.json()
-  
-  }) 
   .catch((err) => {
         alert(err);
       });
 }
-
-const initialState: BookingState = { message: null, errors: {} };
-
-const [state, formAction] = useActionState(createBooking, initialState);
-
-
-
 
   return (
     <div className='w-screen flex justify-center p-5 pt-20 pb-20 font-bold md:p-24 flex-col '>
