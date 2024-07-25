@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { Revenue } from './definitions';
 
 export const formatCurrency = (amount: number) => {
@@ -6,6 +7,14 @@ export const formatCurrency = (amount: number) => {
     currency: 'USD',
   });
 };
+
+export const reserveTableSchema = () => z.object({
+  name: z.string().min(3),
+  phone: z.string().min(9).max(11),
+  pax: z.string(),
+  date: z.date(),
+  time: z.string(),
+})
 
 export const formatDateToLocal = (
   dateStr: string,

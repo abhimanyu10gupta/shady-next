@@ -17,6 +17,7 @@ import { useActionState } from 'react';
 import { createBooking, BookingState } from '@/app/lib/actions';
 
 export default function Form() {
+  
   const initialState: BookingState = { message: null, errors: {} };
 
   const [state, formAction] = useActionState(createBooking, initialState);

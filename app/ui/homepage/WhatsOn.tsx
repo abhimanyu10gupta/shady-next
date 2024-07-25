@@ -2,35 +2,37 @@ import Image from 'next/image'
 import React, { Fragment } from 'react'
 import ShadyLogo from '../public/ShadyLogoWhite.png'
 import { Button } from '@/components/ui/button';
-import Event1 from '@/public/event1.png'
-import Event2 from '@/public/event2.png'
-import Event3 from '@/public/image5.png'
+import Event1 from '@/public/livemusic.png'
+import Event2 from '@/public/trivia.png'
+import Event3 from '@/public/event.png'
 import Link from 'next/link'
+import { fetchEvents } from '@/app/lib/data';
 
-const events = [
-    {
-        title: "Happy Hour",
-        description: "20% on House Spirits",
-        days: "Wednesday and Sunday ",
-        image: Event3,
-    },
-    {
-        title: "Trivia Night",
-        description: "Trivia Night with Aemon",
-        days: "Wednesday at 5:30pm",
-        image: Event2,
+// const events = [
+//     {
+//         title: "Happy Hour",
+//         description: "20% on House Spirits",
+//         days: "Wednesday and Sunday ",
+//         image: Event3,
+//     },
+//     {
+//         title: "Trivia Night",
+//         description: "Trivia Night with Aemon",
+//         days: "Wednesday at 5:30pm",
+//         image: Event2,
 
-    },
-    {
-        title: "Live Music",
-        description: "with Aoife Taurus",
-        days: "Sunday 3pm-5pm",
-        image: Event1,
+//     },
+//     {
+//         title: "Live Music",
+//         description: "with Aoife Taurus",
+//         days: "Sunday 3pm-5pm",
+//         image: Event1,
 
-    },
-]
+//     },
+// ]
 
-const WhatsOn = () => {
+export default async function WhatsOn() {
+    const events = await fetchEvents();
   return (
     <div id="events" className='container w-full p-0'>
         <div className='flex flex-col'>
@@ -60,7 +62,7 @@ const WhatsOn = () => {
                             {event.description}
                         </p>
                         <p className='pt-2 pb-2'>
-                            {event.days}
+                            {event.time}
                         </p>
 
                         <Button variant="outline" className=''>
@@ -86,7 +88,7 @@ const WhatsOn = () => {
                             {event.description}
                         </p>
                         <p className='pt-2 pb-2'>
-                            {event.days}
+                            {event.time}
                         </p>
                         <Button variant="outline" className=''>
                             <Link href="/booking">
@@ -114,4 +116,3 @@ const WhatsOn = () => {
   )
 }
 
-export default WhatsOn

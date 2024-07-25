@@ -34,8 +34,11 @@ async function seedMenuItems() {
 }
 
 async function seedEvents() {
+  
   const insertedEvents = await Promise.all(
+    
     events.map(async(event) => {
+      console.log(event)
       return Events.create(event);
     })
   )
@@ -51,7 +54,7 @@ export async function GET() {
     // await seedBookings();
     // await seedMenuItems();
     // console.log(await seedEvents());
-    
+    await seedEvents();
     return Response.json({ message: 'Database seeded successfully' });
 
   } catch (error) {

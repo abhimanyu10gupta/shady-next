@@ -4,6 +4,7 @@ const eventSchema = new mongoose.Schema({
     title: {type: String},
     description: {type: String},
     time: {type: String},
+    image: {type: String},
 })
 
 export default mongoose.models.Events || mongoose.model("Events", eventSchema);

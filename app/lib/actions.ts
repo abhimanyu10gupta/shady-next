@@ -7,6 +7,7 @@ import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import  Booking from '@/models/booking';
 import  Events  from '@/models/event';
+import { reserveTableSchema } from '@/app/lib/utils';
 
 const BookingFormSchema = z.object({
   name: z.string({
@@ -42,6 +43,9 @@ const EventFormSchema = z.object({
   time: z.string({
     invalid_type_error: 'Please enter a time.',
   }),
+  image: z.string({
+    invalid_type_error: 'Please enter an image path.',
+  }),
 });
 
 const CreateInvoice = BookingFormSchema.omit({});
@@ -65,6 +69,7 @@ export type EventState = {
     title? : string[];
     description? : string[];
     time? : string[];
+    image? : string[],
   }
   message? : string | null;
 
@@ -120,6 +125,22 @@ export async function createEvent(prevState: EventState, formData: FormData) {
   revalidatePath('/dashboard/events')
   redirect('/dashboard/events');
 }
+
+
+export async function createReservation(booking: BookingProps) {
+  console.log(booking)
+await dbConnect()
+  try {
+    await Booking.create(booking)
+  } catch(error) {
+    return {
+      message: 'Database Error: Failed to Create Booking.',
+    };
+  }
+  revalidatePath('/dashboard/bookings')
+}
+
+
 
 export async function createBooking(prevState: BookingState, formData: FormData) {
   const validatedFields = CreateBooking.safeParse({
@@ -188,6 +209,7 @@ export async function updateEvent(id: string, prevState: EventState, formData: F
     title: formData.get('title'),
     description: formData.get('description'),
     time: formData.get('time'),
+    image: formData.get('image')
   })
 
   if (!validatedFields.success) {
@@ -218,6 +240,7 @@ export async function updateBooking(id: string, prevState: BookingState, formDat
       time : formData.get('time'),
       date : formData.get('date'),
       phone: formData.get('phone'),
+
   });
   if (!validatedFields.success) {
     return {

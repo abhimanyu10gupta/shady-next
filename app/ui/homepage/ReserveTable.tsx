@@ -2,91 +2,105 @@
 
 import { partySizeArr, times } from '@/constants';
 
-import React from 'react'
+import React, { useActionState } from 'react'
 
-// import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 
-// import {
-//   Form,
-//   FormControl,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage,
-// } from "@/components/ui/form"
-// import { Input } from "@/components/ui/input"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 
 import { z } from "zod"
-// import { zodResolver } from "@hookform/resolvers/zod"
-// import { reserveTableSchema } from '@/app/lib/utils';
+import { zodResolver } from "@hookform/resolvers/zod"
+import { reserveTableSchema } from '@/app/lib/utils';
 // import { toast } from "@/components/ui/use-toast"
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select"
-// import { format } from "date-fns"
-// import { Calendar as CalendarIcon } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
  
-// import { cn } from "@/app/lib/utils"
-// import { Button } from "@/components/ui/button"
-// import { Calendar } from "@/components/ui/calendar"
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger,
-// } from "@/components/ui/popover"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { revalidatePath } from 'next/cache';
+import { BookingState, createBooking, createReservation } from '@/app/lib/actions';
+
 
 const ReserveTable = () => {
 
-//   const [partySize, setPartySize] = React.useState('');
-//   const [time, setTime] = React.useState('');
-//   const formSchema = reserveTableSchema();
-//   const [date, setDate] = React.useState<Date>()
-//   const [loading, setLoading] = React.useState(false);
+  const [partySize, setPartySize] = React.useState('');
+  const [time, setTime] = React.useState('');
+  const formSchema = reserveTableSchema();
+  const [date, setDate] = React.useState<Date>()
+  const [loading, setLoading] = React.useState(false);
 
-//   const form = useForm<z.infer<typeof formSchema>>({
-//     resolver: zodResolver(formSchema),
-//  })
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+ })
 
-// function onSubmit(data: z.infer<typeof formSchema>) {
-//   console.log("haha")
-//   console.log(JSON.stringify(data) + "asdlkjflaksdjflkdsjlkfsjlksdjflksjdlkfj")
-//   setLoading(true)
+function onSubmit(data: z.infer<typeof formSchema>) {
+  console.log("haha")
+  console.log(JSON.stringify(data) + "asdlkjflaksdjflkdsjlkfsjlksdjflksjdlkfj")
+  setLoading(true)
 
-//   const apiEndpoint = '/api/booking';
 
-//   fetch(apiEndpoint, {
-//     method: 'POST',
-//     body: JSON.stringify(data),
-//   })
-//     .then((res) => {res.json()
 
-// })
-//     .then((response) => {
-      
-//       toast({
-//         title: "You submitted the following values:",
-//         description: (
-//           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-//             <code className="">{JSON.stringify(response, null, 2)}</code>
-//           </pre>
-//         ),
-//       })
-//     })
-//     .catch((err) => {
-//       alert(err);
-//     });
+    const { name, pax, time, phone, date } = data
 
+    const formatDate = date.toISOString().split('T')[0];
+
+    
+    const booking = { 
+        name: name,
+        pax: pax,
+        time: time,
+        phone: phone,
+        date: formatDate,
+    }
+
+    createReservation(booking)
+
+    const apiEndpoint = "/api/email"
+
+    fetch(apiEndpoint, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        res.json()
   
+  }) 
+  .catch((err) => {
+        alert(err);
+      });
+}
+
+const initialState: BookingState = { message: null, errors: {} };
+
+const [state, formAction] = useActionState(createBooking, initialState);
+
+
 
 
   return (
     <div className='w-screen flex justify-center p-5 pt-20 pb-20 font-bold md:p-24 flex-col '>
-      {/* <div className='w-full flex justify-center'>
+     <div className='w-full flex justify-center'>
         <p className=' text-6xl '>
           Reserve a Table
         </p>
@@ -247,7 +261,7 @@ const ReserveTable = () => {
         </p>
       </div>
     </div>)}
-   */}
+   
 
     </div>
     

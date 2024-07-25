@@ -4,7 +4,6 @@ const menuItemSchema = new mongoose.Schema<MenuItemProps>({
     name: {
         type: String,
         required: true,
-
     },
     description: {
         type: String,

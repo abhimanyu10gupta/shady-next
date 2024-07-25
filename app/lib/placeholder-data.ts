@@ -13,16 +13,21 @@ const events = [
     title: "Happy Hour",
     description: "20% on House Spirits",
     time: "Wednesday and Sunday",
+    image: '/event.png'
   },
   {
     title: "Trivia Night",
     description: "Trivia Night with Aemon",
     time: "Wednesday at 5:30pm",
+    image: '/trivia.png'
+
   },
   {
     title: "Live Music",
     description: "with Aoife Taurus",
     time: "Sunday 3pm-5pm",
+    image: '/livemusic.png'
+
   }
 ]
 

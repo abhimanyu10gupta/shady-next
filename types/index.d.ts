@@ -13,11 +13,11 @@ declare interface MenuItemProps {
   }
 
 declare interface BookingProps {
-  _id: Schema.Types.ObjectId,
+  // _id: Schema.Types.ObjectId,
   name: string;
   date: string;
   time: string;
-  pax: int;
+  pax: string;
   phone: string;
 }
 
@@ -26,6 +26,7 @@ declare interface EventProps {
   title: string,
   description: string,
   time:string,
+  image: string;
 }
 
 declare interface OrderProps {
