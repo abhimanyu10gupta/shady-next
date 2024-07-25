@@ -103,6 +103,7 @@ export async function createEvent(prevState: EventState, formData: FormData) {
     title: formData.get('title'),
     description: formData.get('description'),
     time: formData.get('time'),
+    image: formData.get('image')
   })
 
 
