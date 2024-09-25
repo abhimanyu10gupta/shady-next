@@ -11,7 +11,7 @@ images: {
       {
         protocol: "https",
         hostname: "utfs.io",
-        // pathname: "f/" + process.env.UPLOADTHING_SECRET + "/*",
+        pathname: "f/*",
       },
     ],
   },
