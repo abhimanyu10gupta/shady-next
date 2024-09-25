@@ -5,6 +5,16 @@ const nextConfig = {
 },
 eslint: {
     ignoreDuringBuilds:true
-}};
+},
+images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+        // pathname: "f/" + process.env.UPLOADTHING_SECRET + "/*",
+      },
+    ],
+  },
+};
 
 export default nextConfig;

@@ -7,7 +7,7 @@ const bookingSchema = new mongoose.Schema<BookingProps>({
 
     },
     pax: {
-        type: Number,
+        type: String,
         required: true,
 
     },

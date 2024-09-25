@@ -25,7 +25,7 @@ const Images = () => {
             </div>
             <div className='w-full h-1/2 md:w-1/2 md:h-full flex flex-col '>
                     <div className='flex h-1/2'>
-                    <div className='w-1/2 h-full relative m-1 overflow-hidden'>
+                    <div className='w-1/2 h-full relative m-1 mt-0 overflow-hidden'>
                         <Image 
                             src={Image1}
                             alt={"im1"}
@@ -34,7 +34,7 @@ const Images = () => {
                             className='hover:scale-105 transition ease-in-out duration-1000'
                         />
                     </div>
-                   <div className='w-1/2 h-full relative m-1 overflow-hidden'>
+                   <div className='w-1/2 h-full relative m-1 mt-0 overflow-hidden'>
                         <Image 
                             src={Image3}
                             alt={"im3"}
@@ -44,7 +44,7 @@ const Images = () => {
                         />
                     </div>
                     </div>
-                    <div className='flex h-1/2 m-1'>
+                    <div className='flex h-1/2 mt-1'>
                         
                     <div className='w-1/2 h-full relative m-1 overflow-hidden'>
                         <Image 

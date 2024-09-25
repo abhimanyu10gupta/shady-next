@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 import { EventState, updateEvent } from '@/app/lib/actions';
 import { useActionState } from 'react';
+import { UploadButton } from '@/lib/utils';
 
 export default function EditInvoiceForm({
   event,
@@ -188,7 +189,19 @@ export default function EditInvoiceForm({
 
               />
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+
             </div>
+            <UploadButton
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  console.log("Files: ", res);
+                  const imagePath = res[0].key
+                  var input2 = ((document.getElementById('image') as HTMLInputElement));
+                  input2.value = imagePath
+                  alert("Upload Completed");
+                }}
+                />
           </div>
           <div id="invoice-error" aria-live="polite" aria-atomic="true">
         {state.errors?.image &&

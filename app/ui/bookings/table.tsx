@@ -1,9 +1,13 @@
+
 import Image from 'next/image';
 import { UpdateBooking, DeleteBooking } from '@/app/ui/bookings/buttons';
 import InvoiceStatus from '@/app/ui/bookings/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchBookings } from '@/app/lib/data';
 // import { fetchFilteredInvoices } from '@/app/lib/data';
+import Booking from '@/models/booking'
+import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 export default async function EventsTable({
   query,
@@ -14,6 +18,7 @@ export default async function EventsTable({
 }) {
   // const invoices = await fetchFilteredInvoices(query, currentPage);
   const bookings = await fetchBookings();
+  
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">

@@ -22,17 +22,7 @@ export async function fetchLatestBookings() {
   await dbConnect();
 
   const nextSunday = getNextSunday().toISOString().split('T')[0];
-  // const nextSundayDate = nextSunday.getDate();
-  // const book = await Booking.findOne({name: 'Priyaa gupta'})
-  // const bookDateStr = book.date
-  // console.log(book)
-  // console.log(bookDateStr)
-  console.log("nextsunday", nextSunday)
   const today = new Date().toISOString().split('T')[0];
-  console.log("today",today)
-
-  // console.log("today", today)
-  // console.log(today >= bookDateStr)
 
   try {
     const data = await Booking.find({      

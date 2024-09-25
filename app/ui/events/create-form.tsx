@@ -15,6 +15,7 @@ import {
 import { Button } from '@/app/ui/button';
 import { useActionState } from 'react';
 import { createEvent, EventState } from '@/app/lib/actions';
+import { UploadButton } from '@/lib/utils';
 
 export default function Form() {
 
@@ -22,7 +23,7 @@ export default function Form() {
 
   const [state, formAction] = useActionState(createEvent, initialState);
 
-
+  var imagePath = "";
   return (
     <form action={formAction} aria-describedby="form-error">
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -146,6 +147,21 @@ export default function Form() {
           ))}
       </div>
         </div>
+        <UploadButton
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          console.log("Files: ", res);
+          imagePath= res[0].key
+          var input2 = ((document.getElementById('image') as HTMLInputElement));
+          input2.value = imagePath
+          alert("Upload Completed");
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />
                 {/* Event Image */}
                 <div className="mb-4">
           <label htmlFor="image" className="mb-2 block text-sm font-medium">
@@ -159,6 +175,8 @@ export default function Form() {
                 id="image"
                 name="image"
                 type="text"
+                // defaultValue={imagePath}
+                value={imagePath}
                 placeholder="Event image"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="invoice-error"
@@ -176,6 +194,7 @@ export default function Form() {
           ))}
       </div>
         </div>
+
         {/* Booking Pax */}
         {/* <div className="mb-4">
           <label htmlFor="pax" className="mb-2 block text-sm font-medium">

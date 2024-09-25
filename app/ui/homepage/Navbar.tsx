@@ -70,6 +70,11 @@ const Navbar = () => {
                   <p>Menu</p>
                 </Link>
               </li>
+              <li key={"five"}>
+                <Link href="/functions">
+                  <p>Functions</p>
+                </Link>
+              </li>
               <li key={"three"}>
                 <Link href="/booking">
                   <p>Book a Table</p>
@@ -80,6 +85,7 @@ const Navbar = () => {
                   <p>Contact</p>
                 </Link>
               </li>
+              
             </ul>
             </div>
           </div>

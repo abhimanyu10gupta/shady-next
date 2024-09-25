@@ -144,6 +144,8 @@ await dbConnect()
 
 
 export async function createBooking(prevState: BookingState, formData: FormData) {
+  // const bookingEventEmitter = Booking.watch()
+  // bookingEventEmitter.on('insert', change => console.log("here change", JSON.stringify(change)))
   const validatedFields = CreateBooking.safeParse({
     name : formData.get('name'),
     pax : formData.get('pax'),

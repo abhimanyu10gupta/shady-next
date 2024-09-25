@@ -7,6 +7,7 @@ import Event2 from '@/public/trivia.png'
 import Event3 from '@/public/event.png'
 import Link from 'next/link'
 import { fetchEvents } from '@/app/lib/data';
+import { utapi } from "@/server/uploadthing";
 
 // const events = [
 //     {
@@ -33,6 +34,16 @@ import { fetchEvents } from '@/app/lib/data';
 
 export default async function WhatsOn() {
     const events = await fetchEvents();
+    // const oneUrl = await utapi.getFileUrls(
+    //     "669dcf91-f16c-4496-8929-b68b1aae99d8-eb9svx.png",
+    //   );
+    const image =  await fetch('https://utfs.io/f/8848b1d9-69a6-41e3-b35c-4c57b3874435-gwg8u1.png');
+    console.log(image)
+    events.map((event) => {
+    const eventImage = event.image;
+    console.log(eventImage)
+    })
+    
   return (
     <div id="events" className='container w-full p-0'>
         <div className='flex flex-col'>
@@ -42,12 +53,13 @@ export default async function WhatsOn() {
 
             <div className='container flex w-full flex-col justify-center'>
            {events.map((event, i) => {
+           
             return(
             i%2===0 ? <Fragment key={i}>
 <div className='flex flex-col sm:flex-row w-full md:justify-center pt-10 pb-10'>
                 <div className='basis-1/2 flex w-full justify-center'>
                     <Image 
-                        src={event.image}
+                        src={"https://utfs.io/f/"+event.image}
                         alt={""}
                         width={500}
                         height={500}
@@ -64,14 +76,11 @@ export default async function WhatsOn() {
                         <p className='pt-2 pb-2'>
                             {event.time}
                         </p>
-
                         <Button variant="outline" className=''>
                             <Link href="/booking">
                                 Book a table 
                              </Link>
                         </Button>
-
-
                     </div>
                 </div>
                 </div>
@@ -95,15 +104,13 @@ export default async function WhatsOn() {
                                 Book a table 
                              </Link>                        
                         </Button>
-
                     </div>
                 </div>
                 <div className='basis-1/2 flex w-full justify-center'>
                     <Image 
-                        src={event.image}
+                        src={"https://utfs.io/f/"+event.image}
                         width={500}
                         height={500}
-
                         alt={""}
                     />
                 </div>
