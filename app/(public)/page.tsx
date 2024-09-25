@@ -16,7 +16,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
-    <div className='top-0'>
+    <div className='top-0 overscroll-contain'>
         <Hero />
         <div className="">        
           <About />

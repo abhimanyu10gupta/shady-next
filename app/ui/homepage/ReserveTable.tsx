@@ -90,9 +90,9 @@ function onSubmit(data: z.infer<typeof formSchema>) {
 const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
   return (
-    <div className='w-screen flex justify-center p-5 pt-20 pb-20 font-bold md:p-24 flex-col '>
+    <div className='w-screen flex justify-center p-5 pt-20 pb-20 font-bold md:p-24 md:pt-48 flex-col md:h-[720px]'>
      <div className='w-full flex justify-center'>
-        <p className=' text-6xl '>
+        <p className='text-6xl text-center'>
           Reserve a Table
         </p>
       </div>
@@ -137,8 +137,8 @@ const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
            
         </div>
         <div className='flex flex-col sm:flex-row'>
-        <div className='flex basis-1/5 flex-col justify-center m-auto' >
-          <div className=' flex justify-center'>
+        <div className='flex basis-1/5 flex-col md:justify-center md:m-auto' >
+          <div className='flex md:justify-center pb-8'>
             <FormField
             control={form.control}
             name="pax"
@@ -164,7 +164,7 @@ const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
           </div>
           </div>
           <div className='flex basis-1/5 flex-col m-auto'>
-            <div className='flex justify-center'>
+            <div className='flex justify-center pb-8'>
               <FormField
                 control={form.control}
                 name="date"
@@ -190,7 +190,7 @@ const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0 bg-black" align="start">
+                      <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
                           selected={field.value}
@@ -208,8 +208,8 @@ const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
               />
             </div>
           </div>
-          <div className='flex basis-1/5 flex-col m-auto'>
-            <div className='flex justify-center'>
+          <div className='flex basis-1/5 flex-col md:m-auto'>
+            <div className='flex md:justify-center'>
             <FormField
             control={form.control}
             name="time"

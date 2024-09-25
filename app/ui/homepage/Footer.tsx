@@ -13,8 +13,8 @@ const Footer = () => {
       <div className='flex flex-col'>
       {/* <Map /> */}
         <div className='container basis-4/5 flex flex-col md:flex-row  justify-center'>
-          <div className='flex flex-col justify-center m-auto basis-1/3'>
-            <div className=' flex w-1/2 pb-6'>
+          <div className='flex flex-col basis-1/3 p-12'>
+            <div className='flex w-1/2 pb-6'>
               <Image 
                 src={logowhite}
                 alt={""}
