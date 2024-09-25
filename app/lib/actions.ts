@@ -124,6 +124,7 @@ export async function createEvent(prevState: EventState, formData: FormData) {
     };
   }
   revalidatePath('/dashboard/events')
+  revalidatePath('/dashboard')
   redirect('/dashboard/events');
 }
 
@@ -139,6 +140,8 @@ await dbConnect()
     };
   }
   revalidatePath('/dashboard/bookings')
+  revalidatePath('/dashboard')
+
 }
 
 
@@ -170,6 +173,8 @@ export async function createBooking(prevState: BookingState, formData: FormData)
     };
   }
   revalidatePath('/dashboard/bookings')
+  revalidatePath('/dashboard')
+
   redirect('/dashboard/bookings');
 }
 // export async function createBookings(prevState: State, formData: FormData) {
@@ -231,7 +236,7 @@ export async function updateEvent(id: string, prevState: EventState, formData: F
 
   }
   revalidatePath('/dashboard/events');
-  revalidatePath('/')
+  revalidatePath('/dashboard')
   redirect('/dashboard/events');
 }
 
@@ -262,6 +267,8 @@ export async function updateBooking(id: string, prevState: BookingState, formDat
 
   }
   revalidatePath('/dashboard/bookings');
+  revalidatePath('/dashboard')
+
   redirect('/dashboard/bookings');
 }
 // export async function updateBooking(id: string, prevState: State, formData: FormData) {
@@ -299,6 +306,8 @@ export async function deleteBooking(id:string) {
   try {
     await Booking.findByIdAndDelete(id);
     revalidatePath('/dashboard/bookings')
+    revalidatePath('/dashboard')
+
     return {message:"deleted booking"}
   } catch(error) {
     return {
@@ -337,6 +346,8 @@ export async function deleteEvent(id:string) {
   try {
     await Events.findByIdAndDelete(id);
     revalidatePath('/dashboard/events')
+    revalidatePath('/dashboard')
+
     return {message:"deleted event"}
   } catch(error) {
     return {

@@ -23,9 +23,9 @@ export default async function CardWrapper() {
     <>
       {/* NOTE: Uncomment this code in Chapter 9 */}
 
-      <Card title="Total Reservations" value={totalReservations} type="collected" />
-      <Card title="Todays Reservations" value={totalReservations} type="pending" />
-      <Card title="Total Pax Today" value={totalPax} type="invoices" />
+      <Card title="Reservations Today" value={totalReservations} type="collected" />
+      <Card title="Reservations This Week" value={totalReservations} type="pending" />
+      <Card title="Reservations To Date" value={totalPax} type="invoices" />
       <Card
         title="Total Customers"
         value={totalPax}
