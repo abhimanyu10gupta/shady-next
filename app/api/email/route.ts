@@ -39,19 +39,43 @@ export async function POST(request: NextRequest) {
     `,
   };
 
-  const sendMailPromise = () =>
-    new Promise<string>((resolve, reject) => {
-      transport.sendMail(mailOptions, function (err: any) {
-        if (!err) {
-          resolve('Email sent');
+  await new Promise((resolve, reject) => {
+    // verify connection configuration
+    transport.verify(function (error:any, success:any) {
+        if (error) {
+            console.log(error);
+            reject(error);
         } else {
-          reject(err.message);
+            console.log("Server is ready to take our messages");
+            resolve(success);
         }
-      });
     });
+});
+  // const sendMailPromise = () =>
+  //   new Promise<string>((resolve, reject) => {
+  //     transport.sendMail(mailOptions, function (err: any) {
+  //       if (!err) {
+  //         resolve('Email sent');
+  //       } else {
+  //         reject(err.message);
+  //       }
+  //     });
+  //   });
+
 
   try {
-    await sendMailPromise();
+    await new Promise((resolve, reject) => {
+      // send mail
+      transport.sendMail(mailOptions, (err:any, info:any) => {
+          if (err) {
+              console.error(err);
+              reject(err);
+          } else {
+              console.log(info);
+              resolve(info);
+          }
+      });
+  });
     return NextResponse.json({ message: 'Email sent' });
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 500 });

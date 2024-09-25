@@ -75,8 +75,16 @@ function onSubmit(data: z.infer<typeof formSchema>) {
     }
 
     createReservation(booking)
-    sendEmail(booking)
+    // sendEmail(booking)
+    const apiEndpoint = "/api/email"
 
+    fetch(apiEndpoint, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  .catch((err) => {
+        alert(err);
+      });
 }
 
 const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
