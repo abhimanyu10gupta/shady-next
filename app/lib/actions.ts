@@ -239,6 +239,7 @@ export async function updateEvent(id: string, prevState: EventState, formData: F
   }
   revalidatePath('/dashboard/events');
   revalidatePath('/dashboard')
+  revalidatePath('/')
   redirect('/dashboard/events');
 }
 
