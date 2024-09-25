@@ -90,7 +90,7 @@ function onSubmit(data: z.infer<typeof formSchema>) {
 const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
 
   return (
-    <div className='w-screen flex justify-center p-5 pt-20 pb-20 font-bold md:p-24 md:pt-48 flex-col md:h-[720px]'>
+    <div className='w-screen flex justify-center p-5 pt-20 pb-20 font-bold md:p-24 md:pt-96 flex-col md:h-[720px]'>
      <div className='w-full flex justify-center'>
         <p className='text-6xl text-center'>
           Reserve a Table

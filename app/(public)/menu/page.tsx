@@ -7,7 +7,7 @@ import MenuItem from '@/app/ui/homepage/MenuItem'
 const Menu = () => {
   return (
     <div className='w-screen'>
-      <div className='flex flex-col mx-auto max-w-[980px] pt-48 pb-20 p-2'>
+      <div className='flex flex-col mx-auto max-w-[980px] pt-48 md:pt-64 pb-20 p-2'>
 
         <div className=''>
           <h1 className='text-2xl'>
