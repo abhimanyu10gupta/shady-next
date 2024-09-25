@@ -39,7 +39,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { revalidatePath } from 'next/cache';
-import { BookingState, createBooking, createReservation } from '@/app/lib/actions';
+import { BookingState, createBooking, createReservation, sendEmail } from '@/app/lib/actions';
 
 
 const ReserveTable = () => {
@@ -75,16 +75,8 @@ function onSubmit(data: z.infer<typeof formSchema>) {
     }
 
     createReservation(booking)
+    sendEmail(booking)
 
-    const apiEndpoint = "/api/email"
-
-    fetch(apiEndpoint, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    })
-  .catch((err) => {
-        alert(err);
-      });
 }
 
 const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);

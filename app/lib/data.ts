@@ -97,14 +97,35 @@ export async function fetchEventById(id: string) {
   }
 }
 
+export async function fetchBookingsToday() {
+  await dbConnect();
+
+  const today = new Date().toISOString().split('T')[0];
+
+  try {
+    const data = await Booking.find({      
+      $and: [
+          {date: {$gte : today}},
+          {date: {$lte : today}}
+      ]}).select('name pax date time')
+    return data;
+  }catch(error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch latest bookings data.');
+  }
+}
+
 export async function fetchCardData() {
   try {
+    const reservationsThisWeek = (await fetchLatestBookings()).length
     const totalReservations = await Booking.countDocuments()
-    const totalPax = await Booking.countDocuments()
-
+    const totalEvents = await Events.countDocuments()
+    const bookingsToday = (await fetchBookingsToday()).length
     return {
       totalReservations,
-      totalPax
+      totalEvents,
+      reservationsThisWeek,
+      bookingsToday
     }
   } catch(error) {
     console.error('Database Error:', error);

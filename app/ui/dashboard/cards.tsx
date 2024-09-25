@@ -16,19 +16,21 @@ const iconMap = {
 
 export default async function CardWrapper() {
   const {totalReservations,
-    totalPax,
+    totalEvents,
+    reservationsThisWeek,
+    bookingsToday
     } = await fetchCardData();
     
   return (
     <>
       {/* NOTE: Uncomment this code in Chapter 9 */}
 
-      <Card title="Reservations Today" value={totalReservations} type="collected" />
-      <Card title="Reservations This Week" value={totalReservations} type="pending" />
-      <Card title="Reservations To Date" value={totalPax} type="invoices" />
+      <Card title="Reservations Today" value={bookingsToday} type="collected" />
+      <Card title="Reservations This Week" value={reservationsThisWeek} type="pending" />
+      <Card title="Reservations To Date" value={totalReservations} type="invoices" />
       <Card
-        title="Total Customers"
-        value={totalPax}
+        title="Total Events on Homepage"
+        value={totalEvents}
         type="customers"
       />
     </>
